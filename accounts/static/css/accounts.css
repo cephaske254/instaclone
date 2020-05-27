@@ -1,0 +1,27 @@
+.or_ {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px 40px 18px;
+}
+.btn-blue {
+    background-color: #0095f6;
+    color: #ffffff !important;
+    font-weight: 600;
+}
+.reg_form input {
+    padding: 9px 0 7px 8px;
+    align-items: center;
+    background: #fafafa;
+    border: 1px solid #dbdbdb !important;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+    position: relative;
+    width: 100%;
+
+}
