@@ -25,3 +25,11 @@
     width: 100%;
 
 }
+
+.img-col {
+    background: url("../images/ig_login2.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    min-height: 70vh;
+}

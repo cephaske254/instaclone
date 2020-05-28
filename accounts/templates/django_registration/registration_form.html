@@ -2,11 +2,10 @@
 {% load static %}
 {% block content %}
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center min-vh-100 align-items-center">
         <div class="py-2" style="width: 350px;">
             <div class="card bg-white">
                 <div class="card-body">
-                    <img src="{% static 'images/logo_lg.png' %}" alt="" class="img-responsive">
                     <div class="card-subtitle text-center font-weight-bold text-muted h6">
                         Sign up to see photos and videos from your friends.
                     </div>
@@ -16,12 +15,12 @@
                         <div class="p-1 small">OR</div>
                         <div class="col-sm-5 border-bottom"></div>
                     </div>
-                    <form action="" class="form-horizontal reg_form">
-                        <input type="text" class="my-1" placeholder="Email">
-                        <input type="text" class="my-1" placeholder="Full Name">
-                        <input type="text" class="my-1" placeholder="Username">
-                        <input type="password" class="my-1" placeholder="Password">
-                        <input type="password" class="my-1" placeholder="Confirm Password">
+                    <form action="{% url 'django_registration_register' %}" class="form-horizontal reg_form">
+                        
+                        <input name="{{form.email.name}}" type="text" class="my-1" placeholder="Email">
+                        <input name="{{form.username.name}}" type="text" class="my-1" placeholder="Username">
+                        <input name="{{form.password.name}}" type="password" class="my-1" placeholder="Password">
+                        <input name="{{form.password1.name}}" type="password" class="my-1" placeholder="Confirm Password">
 
                         <button class="btn btn-blue mt-3 btn-sm w-100">Signup </button>
                         <p class=" text-center small text-muted">By signing up, you agree to our Terms, Data Policy and Cookies Policy .</p>

@@ -1,5 +1,3 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-
-def signup(request):
-    return HttpResponse('Hello')
+from django.shortcuts import render
+from django.contrib.auth import login,logout, authenticate
+# Create your views here.
