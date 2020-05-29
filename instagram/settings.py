@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_registration',
     'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -69,7 +70,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'instagram.wsgi.application'
-
+LOGIN_REDIRECT_URL='/'
+LOGOUT_REDIRECT_URL='login'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases

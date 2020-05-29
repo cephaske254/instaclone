@@ -2,16 +2,26 @@
 {% load static %}
 {% block content %}
 <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-8 col-md-4">
+            
+            
+        </div>
+    </div>
     <div class="row justify-content-center min-vh-100 align-items-center">
         <div class="col-md-6 py-2 img-col d-sm-none d-md-flex"></div>
         <div class="py-2" style="width: 350px;">
             <div class="card bg-white">
                 <div class="card-body">
                     <img src="{% static 'images/logo_lg.png' %}" alt="" class="img-responsive">
-                    <form action="{% url 'django_registration_register' %}" class="form-horizontal reg_form">
-                        <input name="{{form.username.name}}" type="text" class="my-1" placeholder="Username">
-                        <input name="{{form.password.name}}" type="password" class="my-1" placeholder="Password">
-                        <button class="btn btn-blue mt-3 btn-sm w-100">Login </button>
+                    {{form.non_field_errors}} 
+                    <form action="{% url 'login' %}" method="POST" class="form-horizontal reg_form">
+                        {% csrf_token %}
+                        <input name="{{form.username.name}}" type="text" class="my-1" placeholder="Username" required>
+                        <!-- {{form.username}} -->
+                        <input name="{{form.password.name}}" type="password" class="my-1" placeholder="Password" required>
+                        {{form.password.errors}}
+                        <button type="submit" class="btn btn-blue mt-3 btn-sm w-100">Login </button>
                     </form>
                     <div class="d-flex flex-row or_">
                         <div class="col-sm-5 border-bottom"></div>
@@ -19,19 +29,21 @@
                         <div class="col-sm-5 border-bottom"></div>
                     </div>
                     <p class="p3 small text-muted text-center">
-                        Sign up <a href="{% url 'django_registration_register' %}" class="card-link">here</a>
+                        Sign up <a href="{% url 'register' %}" class="card-link">here</a>
                     </p>
                 </div>
-            </div>
+            </div> 
             <div class="py-2" style="width: 350px;">
                 <div class="card bg-white">
                     <div class="card-body text-center small">
-                        Dont have an account? <a href="{% url 'django_registration_register' %}" class="card-link">Signup</a>
+                        Dont have an account? <a href="{% url 'register' %}" class="card-link">Signup</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- {{form}} -->
 
 {% endblock %}
