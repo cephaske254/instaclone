@@ -15,3 +15,7 @@ class Comments(models.Model):
     comment = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
 
+class Likes(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    post = models.ForeignKey(Post,on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
