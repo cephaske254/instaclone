@@ -6,10 +6,10 @@
     color: #2c2c2c;
 }
 
-.status-bar .card {
+.status-bar .status-card {
     justify-content: center;
 }
-.status-bar .card,.my-profile-hm {
+.status-bar .status-card,.my-profile-hm {
     height: 116px !important;
     margin: 30px 0;
     display: flex;
@@ -47,6 +47,6 @@
 
 @media only screen and (max-width:600px) {
     .status-bar .card {
-        margin-top: 1px;
+    margin: 1px 0;
     }
 }
