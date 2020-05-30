@@ -1,4 +1,52 @@
-.link-col a{
+.min-vh-90 {
+    min-height: 90vh;
+}
+
+.link-col a {
     color: #2c2c2c;
-    font-weight: lighter;
+}
+
+.status-bar .card {
+    justify-content: center;
+}
+.status-bar .card,.my-profile-hm {
+    height: 116px !important;
+    margin: 30px 0;
+    display: flex;
+    padding: 0 16px;
+    overflow-x: scroll;
+
+}
+.my-profile-hm {
+    align-items: center;
+}
+.profile {
+    margin: 2px 3px;
+}
+.status-bar .status {
+    margin: 2px 3px;
+    min-width: 80px !important;
+    max-width: 80px !important;
+    overflow: hidden;
+}
+
+.status-bar .status img {
+    width: 66px;
+    height: 66px;
+    padding: 2px;
+    border: 2px solid red;
+}
+
+.my-profile-hm img{
+    width: 66px;
+    height: 66px;
+}
+.my-profile-hm{
+    max-height: 116px;
+}
+
+@media only screen and (max-width:600px) {
+    .status-bar .card {
+        margin-top: 1px;
+    }
 }
