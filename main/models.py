@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib import auth
 from django.db.models import Q
+from random import shuffle
 # Create your models here.
 
 class Post(models.Model):
@@ -28,6 +30,10 @@ class Post(models.Model):
         results = cls.objects.filter(Q(user_username__icontains=search) | Q(caption__icontains=search))
         return results
 
+    @classmethod
+    def get_posts(cls):
+        return cls.objects.all()
+
 class Comment(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
@@ -47,4 +53,34 @@ class Like(models.Model):
 
 class Follower(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following') #his id
-    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followers') #my id
+    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followers') #my id when i follow
+    
+    @classmethod
+    def follow_unfollow(cls, username, myusername):
+        user = User.objects.filter(username=username).first() #the person
+        me = User.objects.filter(username=myusername).first() #me/ follower col
+        
+        try:
+            cls.objects.get(user=user, follower=me).delete()
+            return 'Unfollowed'
+        except:
+            cls.objects.create(user=user, follower=me)
+            return 'Followed'
+    def __str__ (self):
+        return self.user.username
+    
+
+
+# Now, in your post method implementation, you would do only this:
+
+# UserFollowing.objects.create(user_id=user.id,
+#                              following_user_id=follow.id)
+# And then, you can access following and followers easily:
+
+# user = User.objects.get(id=1) # it is just example with id 1
+# user.following.all()
+# user.followers.all()
+class UserMethods(User):
+    def get_suggestions():
+        suggestions = User.objects.order_by("?")[:10]
+        return suggestions
