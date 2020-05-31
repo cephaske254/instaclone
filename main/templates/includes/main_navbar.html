@@ -16,7 +16,7 @@
                     <a href="/" class="nav-link"><i class="fas fa-paper-plane fa-lg"></i></a>
                     <a href="/" class="nav-link"><i class="far fa-compass fa-lg"></i></a>
                     <a href="/" class="nav-link"><i class="far fa-heart fa-lg"></i></a>
-                    <a href="/" class="nav-link"><i class="far fa-user-circle fa-lg"></i></a>
+                    <a href="{% url 'profile' request.user %}" class="nav-link"><i class="far fa-user-circle fa-lg"></i></a>
                 </div>
             </nav>
         </div>

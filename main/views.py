@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, Http404
 from .models import UserMethods, Follower, User, Post
 # Create your views here.
 
@@ -15,12 +15,13 @@ def home(request):
 
 def profile(request, username=None):
     if not username:
-        pass
+        raise Http404
     else:
-        pass
+        user = User.objects.filter(username=username).first()
     return render(request, 'profile.html',
                   {
-
+                      'title':f'Profile | @{username}',
+                      'user':user,
                   })
 
 def follow(request, username):
