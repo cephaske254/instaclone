@@ -71,7 +71,7 @@ class Follower(models.Model):
     
 class ProfileImage(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    user = models.ImageField(upload_to='profile')
+    profile_image = models.ImageField(upload_to='profile', default='avatar.png')
 
 
 # Now, in your post method implementation, you would do only this:
