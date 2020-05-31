@@ -69,6 +69,9 @@ class Follower(models.Model):
     def __str__ (self):
         return self.user.username
     
+class ProfileImage(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ImageField(upload_to='profile')
 
 
 # Now, in your post method implementation, you would do only this:
