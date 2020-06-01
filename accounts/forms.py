@@ -10,4 +10,4 @@ class UpdateProfileForm(forms.ModelForm):
 class UpdateDetailsForm(forms.ModelForm):
     class Meta:
         model = User
-        exclude=[]
+        fields=('username','email','first_name','last_name')

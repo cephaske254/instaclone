@@ -27,8 +27,9 @@ def update_profile(request):
         profile_form = UpdateProfileForm(request.POST, request.FILES)
         details_form = UpdateDetailsForm(request.POST)
 
-        if profile_form.is_valid():
+        if profile_form.is_valid() and details_form.is_valid():
             Profile.save_profile(request.user,profile_form.cleaned_data.get('bio'),request.FILES['profile_image'])
+            Profile.save_details(request.user, details_form)
 
         return redirect('profile',username=request.user.username)
     return render(request, 'update_profile.html',{

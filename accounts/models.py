@@ -24,3 +24,6 @@ class Profile(models.Model):
             user_info = cls(user=user, bio=bio,profile_image=image)
             user_info.save()
 
+    def save_details(user, form):
+        print(form)
+
