@@ -7,7 +7,14 @@
 
 {% block content %}
 <div class="container">
+
     <div class="row justify-content-center min-vh-90 align-items-center">
+        {% if request.user.profile.first %}
+        <div class="col-sm-12 col-md-12">
+            <h4 class="text-center">Hello {{request.user |title}}, complete setting up your account to proceed.</h4>
+        </div>
+        {% endif %}
+
         <form action="" class="form-horizontal col-sm-10 col-md-6" method="POST" enctype="multipart/form-data">
             {{profile_form.non_field_errors}}
             {% csrf_token %}
