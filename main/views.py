@@ -7,6 +7,9 @@ from django.forms import ValidationError
 
 @login_required()
 def home(request):
+    if not request.user.profile.first():
+        return redirect('update_profile')
+        
     suggestions = UserMethods.get_suggestions(request.user)
     # posts = Post.get_all()
     posts = Post.objects.all()

@@ -15,6 +15,7 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('update_profile')
     else:
         form = UserCreationForm()
     return render(request,'django_registration/registration_form.html', {'form':form})

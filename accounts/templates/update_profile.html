@@ -9,7 +9,7 @@
 <div class="container">
 
     <div class="row justify-content-center min-vh-90 align-items-center">
-        {% if request.user.profile.first %}
+        {% if not request.user.profile.first %}
         <div class="col-sm-12 col-md-12">
             <h4 class="text-center">Hello {{request.user |title}}, complete setting up your account to proceed.</h4>
         </div>
@@ -20,7 +20,11 @@
             {% csrf_token %}
             <div class="form-group">
                 <div class="">
+                    {% if request.user.profile.first %}
                     <img src="{{request.user.profile.first.profile_image.url}}" class="img-thumbnail mx-auto d-flex my-2" width="120">
+                    {% else %}
+                        Choose profile pic
+                    {% endif %}
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
