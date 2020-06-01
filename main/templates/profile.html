@@ -5,7 +5,8 @@
         <div class="col-md-6 p-3">
             <div class="card-top row align-items-center">
                 <div class="profile-image-cont">
-                    <img src="https://instagram.fmba1-1.fna.fbcdn.net/v/t51.2885-19/s150x150/101024143_237941580840302_9217693196736266240_n.jpg?_nc_ht=instagram.fmba1-1.fna.fbcdn.net&_nc_ohc=aWDtXo9T934AX9bnm-V&oh=86a20abf41a6ab98ebdff493147cbf9e&oe=5EFCA465" width="120" class="rounded-circle">
+                    <img src="{{user.profile.first.profile_image.url}}" width="120" class="rounded-circle">
+                   
                 </div>
                 <div class="wrapper p-4">
                     {% if request.user == user %}
@@ -17,37 +18,35 @@
                             </button>
                         </div>
                         </span>
-                        <button class="btn btn-sm border-dark my-2">Edit Profile</button>
+                        <a href="{% url 'update_profile' %}" class="btn btn-sm border-dark my-2">Edit Profile</a>
                         {% endif %}
+                        <div class="bio px-3 text-muted font-italic">{{user.profile.first.bio}}</div>
                         <div class="profile-info font-weight-bold row" style="justify-self: end;">
-                            <p class="posts_count p-2">{{user | length}} Posts </p>
+                            <p class="posts_count p-2">{{posts | length}} Posts </p>
                             <p class="followers p-2">{{user | length}} Followers </p>
                             <p class="following p-2">{{user | length}} Following </p>
                         </div>
-                    {% if request.user != user %}
+                        {% if request.user != user %}
                         <a href="#" class="btn btn-sm  btn-outline-dark">
                             Follow
                         </a>
                         <a href="#" class="btn btn-sm  btn-dark">
                             Following
                         </a>
-                    {% endif %}
+                        {% endif %}
                     </div>
-                    
-                </div>
-                <div class="">
-                    <form action="" method="POST" enctype="multipart/form-data" class="form-horizontal">
-                        {% csrf_token %}
-                        {{form.as_p}}
-                        <button class="btn btn-sm btn-outline-dark">Post</button>
-                    </form>
+
                 </div>
             </div>
         </div>
     </div>
     <hr class="bg-dark m-1">
+</div>
+
+<div class="container">
+    <div class="text-center font-weight-bold">Posts</div>
     <div class="row justify-content-center">
-        <div class="btn font-weight-bold">Posts</div>
+        {% include 'includes/posts.html' %}
     </div>
 </div>
 

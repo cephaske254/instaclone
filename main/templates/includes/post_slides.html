@@ -1,8 +1,7 @@
-{%  if posts %}
 {% for post in posts %}
 <div class="card bg-white small my-3">
     <header class="d-flex align-items-center p-2">
-        <img src="https://instagram.fmba1-1.fna.fbcdn.net/v/t51.2885-19/s150x150/101024143_237941580840302_9217693196736266240_n.jpg?_nc_ht=instagram.fmba1-1.fna.fbcdn.net&_nc_ohc=aWDtXo9T934AX9bnm-V&oh=86a20abf41a6ab98ebdff493147cbf9e&oe=5EFCA465" width="32" class="rounded-circle">
+        <img src="{{post.user.profile.first.profile_image.url}}" width="32" class="rounded-circle">
         <p class="m-0 font-weight-bold mx-2">{{post.user}}</p> <span class="float-right">{{post.date | timesince}} ago</span>
     </header>
     <div class="card-media p-0">
@@ -26,4 +25,3 @@
 {% empty %}
 <p class="small text-center text-muted">No posts. Follow people to see their posts</p>
 {% endfor %}
-{% endif %}

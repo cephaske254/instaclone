@@ -49,6 +49,22 @@
     max-height: 116px;
 }
 
+.square {
+    position: relative;
+    height: 30vw;
+    width: 30vw;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+}
+.square img{
+    width: 100%;
+}
+
+
+
+
 @media only screen and (max-width:600px) {
     .status-bar .card {
     margin: 1px 0;

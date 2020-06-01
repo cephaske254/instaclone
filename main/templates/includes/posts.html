@@ -1,0 +1,7 @@
+{% for post in posts %}
+<div class="square p-1">
+    <img src="{{post.image.url}}" class="img-thumbnail" alt="">
+</div>
+{% empty %}
+<p class="text-center text-muted h5">No posts so far</p>
+{% endfor %}
