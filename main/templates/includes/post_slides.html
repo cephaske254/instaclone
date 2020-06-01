@@ -1,30 +1,31 @@
-{% for post in posts %}
-<div class="card bg-white small my-3">
-    <a href="{% url 'profile' post.user.username%}" class="d-flex card-link align-items-center p-2">
-        <img src="{{post.user.profile.first.profile_image.url}}" width="32" class="rounded-circle">
-        <p class="m-0 text-dark mx-2">
-            <span class="font-weight-bold card-link">
-                {{post.user}} &nbsp;</span>{{post.date | timesince}} ago
-            </p> 
-        </a>
-    <div class="card-media p-0">
-        <img class="card-img-top" src="{{post.image.url}}">
-    </div>
-    <div class="card-text px-4">
-        <figcaption class="figcaption font-italic"><span class="font-weight-bold">{{post.user}}</span> {{post.caption}}</figcaption>
-    </div>
-    <div class="card-foot py-0">
-        <button class="btn btn-sm m-0">
-            <i class="far fa-heart fa-lg"></i>
-            <span class="badge badge-default bg-light">182</span>
+{% for posts in following.all %}
+    {% for post in posts.user.posts.all %}
+    <div class="card bg-white small my-3">
+        <a href="{% url 'profile' post.user.username%}" class="d-flex card-link align-items-center p-2">
+            <img src="{{post.user.profile.first.profile_image.url}}" width="32" class="rounded-circle">
+            <p class="m-0 text-dark mx-2">
+                <span class="font-weight-bold card-link">
+                    {{post.user}} &nbsp;</span>{{post.date | timesince}} ago
+                </p> 
+            </a>
+        <div class="card-media p-0">
+            <img class="card-img-top" src="{{post.image.url}}">
+        </div>
+        <div class="card-text px-4">
+            <figcaption class="figcaption font-italic"><span class="font-weight-bold">{{post.user}}</span> {{post.caption}}</figcaption>
+        </div>
+        <div class="card-foot py-0">
+            <button class="btn btn-sm m-0">
+                <i class="far fa-heart fa-lg"></i>
+                <span class="badge badge-default bg-light">182</span>
+            </button>
+            <button class="btn btn-sm m-0">
+                <i class="far fa-comment fa-lg"></i>
+                <span class="badge badge-default bg-light">70</span>
         </button>
-        <button class="btn btn-sm m-0">
-            <i class="far fa-comment fa-lg"></i>
-            <span class="badge badge-default bg-light">70</span>
-    </button>
+        </div>
     </div>
-</div>
-
-{% empty %}
-<p class="small text-center text-muted">No posts. Follow people to see their posts</p>
+    {% endfor %}
+    {% empty %}
+    <p class="h5 text-muted font-italic">No posts for now. Find and follow people to see their posts</p>
 {% endfor %}

@@ -23,8 +23,11 @@
                         <div class="bio px-3 text-muted font-italic">{{user.profile.first.bio}}</div>
                         <div class="profile-info font-weight-bold row" style="justify-self: end;">
                             <p class="posts_count p-2">{{posts | length}} Posts </p>
-                            <p class="followers p-2">{{user | length}} Followers </p>
-                            <p class="following p-2">{{user | length}} Following </p>
+                            <p class="followers p-2">{{user.followers.all | length}} Followers </p>
+                            
+                            <p class="following p-2">{{user.following.all | length}} Following </p>
+
+                            
                         </div>
                         {% if request.user != user %}
                         <a href="#" class="btn btn-sm  btn-outline-dark">
