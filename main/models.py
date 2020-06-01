@@ -2,11 +2,16 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.db.models import Q
-from random import shuffle
 # Create your models here.
 
+    
+class Profile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile_image = models.ImageField(upload_to='profile', default='avatar.png')
+    bio = models.TextField()
+    
 class Post(models.Model):
-    image = models.ImageField( upload_to='posts',default='avatar.jpg')
+    image = models.ImageField( upload_to='posts',default='avatar.jpg', null=False)
     caption = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
@@ -54,7 +59,13 @@ class Like(models.Model):
 class Follower(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following') #his id
     follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followers') #my id when i follow
+
+    class Meta:
+        unique_together = (('user', 'follower'), ) 
     
+    def __str__ (self):
+        return self.user.username
+
     @classmethod
     def follow_unfollow(cls, username, myusername):
         user = User.objects.filter(username=username).first() #the person
@@ -66,12 +77,11 @@ class Follower(models.Model):
         except:
             cls.objects.create(user=user, follower=me)
             return 'Followed'
-    def __str__ (self):
-        return self.user.username
-    
-class ProfileImage(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    profile_image = models.ImageField(upload_to='profile', default='avatar.png')
+
+    @classmethod
+    def followers_either(cls,user):
+        return cls.objects.filter(Q(follower=user.id) | Q(user=user.id))
+
 
 
 # Now, in your post method implementation, you would do only this:
@@ -83,7 +93,9 @@ class ProfileImage(models.Model):
 # user = User.objects.get(id=1) # it is just example with id 1
 # user.following.all()
 # user.followers.all()
-class UserMethods(User):
-    def get_suggestions():
-        suggestions = User.objects.order_by("?")[:10]
-        return suggestions
+class UserMethods:
+    def get_suggestions(user):
+        # suggestions = (User.objects.exclude(id = user.id))
+        # return suggestions
+        pass
+

@@ -1,3 +1,4 @@
+{%  if posts %}
 {% for post in posts %}
 <div class="card bg-white small my-3">
     <header class="d-flex align-items-center p-2">
@@ -25,3 +26,4 @@
 {% empty %}
 <p class="small text-center text-muted">No posts. Follow people to see their posts</p>
 {% endfor %}
+{% endif %}

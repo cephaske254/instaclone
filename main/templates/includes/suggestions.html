@@ -2,9 +2,8 @@
     {% for suggestion in suggestions %}
     <li class="d-flex my-1 align-items-center" style="list-style: none;">
         <img src="https://instagram.fmba1-1.fna.fbcdn.net/v/t51.2885-19/s150x150/101024143_237941580840302_9217693196736266240_n.jpg?_nc_ht=instagram.fmba1-1.fna.fbcdn.net&_nc_ohc=aWDtXo9T934AX9bnm-V&oh=86a20abf41a6ab98ebdff493147cbf9e&oe=5EFCA465" height="32" class="rounded-circle">
-        <a href="#" class="card-link col">{{suggestion.username}}</a>
+        <a href="{% url 'profile' suggestion %}" class="card-link col">{{suggestion.username}}</a>
         <a href="{% url 'follow' suggestion %}" class="card-link col font-weight-bold">Follow</a>
-        {{suggestion.is_folowing }}
     </li>
     {% empty %}
     <li class="text-muted text-center small">No suggestions</li>
