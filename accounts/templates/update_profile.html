@@ -9,14 +9,40 @@
 <div class="container">
     <div class="row justify-content-center min-vh-90 align-items-center">
         <form action="" class="form-horizontal col-sm-10 col-md-6" method="POST" enctype="multipart/form-data">
+            {{profile_form.non_field_errors}}
             {% csrf_token %}
             <div class="form-group">
-
                 <div class="">
                     <img src="{{request.user.profile.first.profile_image.url}}" class="img-thumbnail mx-auto d-flex my-2" width="120">
                 </div>
-                <label for="{{profile_form.profile_image.name}}" class="btn btn-dark">Profile <i class="fas fa-camera"></i></label>
-                <input type="file" id="{{profile_form.profile_image.name}}" name="{{profile_form.profile_image.name}}" accept="images/*" required hidden>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label for="{{profile_form.profile_image.name}}" class="btn btn-dark">
+                            Profile<i class="fas fa-camera"></i>
+                        </label>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" id="{{profile_form.profile_image.name}}" name="{{profile_form.profile_image.name}}" accept="images/*" {%  if not request.user.profile.first.profile_image %}required {% endif%} class="custom-file-input">
+                        <label class="custom-file-label">
+                            <span class="small">
+                                {% if request.user.profile.first.profile_image %}
+                                {{request.user.profile.first.profile_image}}
+                                {% else %}
+                                Choose a profile image
+                                {% endif %}
+                            </span>
+                        </label>
+
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+
+                    </div>
+                    <div class="custom-file">
+
+                    </div>
+                </div>
                 <textarea placeholder="Bio..." name='{{profile_form.bio.name}}' type="text" class="form-control" required>{{request.user.profile.first.bio}}</textarea>
             </div>
             <div class="form-row">
@@ -34,5 +60,4 @@
         </form>
     </div>
 </div>
-
 {% endblock %}

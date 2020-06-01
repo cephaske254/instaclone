@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE, related_name='profile')
     bio = models.TextField()
-    profile_image = models.ImageField(upload_to='profiles')
+    profile_image = models.ImageField(upload_to='profiles', null=True, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -24,6 +24,11 @@ class Profile(models.Model):
             user_info = cls(user=user, bio=bio,profile_image=image)
             user_info.save()
 
-    def save_details(user, form):
-        print(form)
+    def save_details(user, first_name,last_name, email):
+        user = User.objects.filter(username=user.username).first()
+        user.email = email
+        user.first_name = first_name
+        user.last_name = last_name
+        user.save()
+        
 
