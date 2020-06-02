@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Q
 import datetime
 
 class Post(models.Model):
@@ -20,6 +21,11 @@ class Post(models.Model):
         post = cls(user=user,caption=caption, image=image)
         print(image)
         post.save()
+
+    @classmethod
+    def search(cls, keywords):
+        result = cls.objects.filter(Q(caption__icontains=keywords))
+        return result
 
 
 class Like(models.Model):

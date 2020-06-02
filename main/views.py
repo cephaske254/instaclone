@@ -43,7 +43,8 @@ def make_post(request):
     if request.method == 'POST' and request.user.is_authenticated:
         form = NewPostForm(request.POST, request.FILES, instance=Post())
         if form.is_valid():
-            Post.save_post(request.user,form.cleaned_data.get('caption'), request.FILES['image'])
+            Post.save_post(request.user, form.cleaned_data.get(
+                'caption'), request.FILES['image'])
             return redirect('profile', request.user)
 
         # return redirect('home')
@@ -53,10 +54,16 @@ def make_post(request):
 
                   })
 
+
 def search(request):
-    return render(request,'search.html')
+    posts = Post.search(request.GET['search'])
+    return render(request, 'search.html',
+                  {
+                      'posts':posts
+                  })
+
+
 def follow(request, username):
     user = User.objects.filter(username=username).first()
     follow_unfollow = Follower.follow_unfollow(username, request.user)
     return HttpResponse(follow_unfollow)
-

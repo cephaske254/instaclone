@@ -3,11 +3,19 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col border-right ">
-            <h3 class="text-center">Posts containing </h3>
+            <h3 class="text-center">Posts containing {{request.GET.search}} </h3>
             <hr>
             {% for post in posts %}
-            <div class="card">
+            <div class="card d-flex flex-row my-3">
+                <img src="{{ post.image.url }}" alt="" class="" width="100">
+                <div class="d-flex flex-column align-items-end">
+                    <h4>{{post.caption | truncatechars:20 |title }}</h4>
+                    <div class="profile-info p-1">
+                        <img src="{{ post.user.profile.first.profile_image.url }}" alt="" class="rounded-circle" width="32" height="32">
+                        @{{ post.user.username }}
+                    </div>
 
+                </div>
             </div>
             {% empty %}
             <h5 class="text-muted">Couldn't find any result :)</h5>
