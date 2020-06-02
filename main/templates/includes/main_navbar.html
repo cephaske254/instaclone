@@ -7,8 +7,8 @@
                     <img src="{% static 'images/logo_sm.png' %}" alt="" class="img-responsive">
                 </a>
                 <div class="d-none d-md-flex col justify-content-end">
-                    <form action="/" class="form-inline align-items-center">
-                        <input type="search" name="search" id="" class="form-control form-control-sm m-auto">
+                    <form action="{% url 'search' %}" class="form-inline align-items-center">
+                        <input type="search" name="search" value="" class="form-control form-control-sm m-auto">
                     </form>
                 </div>
                 <div class="col link-col row justify-content-end">

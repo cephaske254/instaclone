@@ -1,0 +1,31 @@
+{% extends 'main_base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col border-right ">
+            <h3 class="text-center">Posts containing </h3>
+            <hr>
+            {% for post in posts %}
+            <div class="card">
+
+            </div>
+            {% empty %}
+            <h5 class="text-muted">Couldn't find any result :)</h5>
+            {% endfor %}
+        </div>
+
+        <div class="col border-dark">
+            <h3 class="text-center">Suggested users </h3>
+            <hr>
+            {% for post in posts %}
+            <div class="card">
+
+            </div>
+            {% empty %}
+            <h5 class="text-muted">No one to suggest</h5>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
