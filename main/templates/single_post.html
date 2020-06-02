@@ -10,10 +10,10 @@
                 </a>
                 <img src="{{post.image.url}}" class="card-img-top">
                 <div class="card-foot py-0">
-                    <button class="btn btn-sm m-0">
+                    <a href="{% url 'like' post.id %}" class="btn btn-sm m-0">
                         <i class="far fa-heart fa-lg"></i>
-                        <span class="badge badge-default bg-light">182</span>
-                    </button>
+                        <span class="badge badge-default bg-light">{{post.likes.all | length }}</span>
+                    </a>
                     <button class="btn btn-sm m-0">
                         <i class="far fa-comment fa-lg"></i>
                         <span class="badge badge-default bg-light">{{ post.comments.all | length }}</span>

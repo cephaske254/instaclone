@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, Http404, redirect
-from .models import Follower, User, Post, Comment
+from .models import Follower, User, Post, Comment, Like
 from .forms import NewPostForm
 from django.contrib.auth.decorators import login_required
 from django.forms import ValidationError
@@ -96,3 +96,12 @@ def follow(request, username):
         return redirect(request.META['HTTP_REFERER'])
     else:
         return redirect('profile', username)
+
+@login_required()
+def like(request,post_id):
+    post = Post.get_by_id(post_id)
+    like_unlike = Like.like_unlike(request.user, post)
+    if request.META['HTTP_REFERER']:
+        return redirect(request.META['HTTP_REFERER'])
+    else:
+        return redirect('view_post', post_id)

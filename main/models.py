@@ -33,8 +33,21 @@ class Post(models.Model):
 
 
 class Like(models.Model):
-    pass
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='liked')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE,related_name='likes')
+    date = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.post.caption
+
+    @classmethod
+    def like_unlike(cls,user, post):
+        try:
+            cls.objects.filter(user=user, post=post).first().delete()
+            return 'disliked'
+        except:
+            cls(post=post,user=user).save()
+            return 'liked'
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
