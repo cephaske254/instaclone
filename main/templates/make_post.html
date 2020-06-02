@@ -1,0 +1,47 @@
+{% extends 'main_base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center align-items-center min-vh-90"><div class="col-sm-8 col-md-7 p-2">
+        <div class="d-flex">
+            <img src="{{request.user.profile.first.profile_image.url}}" alt="" class="rounded-circle" width="120">
+            <div class="profile-info text-center d-flex flex-column justify-content-center px-4">
+                <p class="m-0 h4 text-capitalize">{{request.user.first_name}} {{request.user.last_name}}</p>
+                <p class="m-0 h5 text-muted text-capitalize">{{request.user.posts.all | length}} Posts</p>
+            </div>
+        </div>
+    </div>
+    <hr class="col-sm-12">
+        <form action="{% url 'make_post' %}" class="form-horizontal col-md-7  col-sm-8 border rounded p-2" method="POST" enctype="multipart/form-data">
+            <p class="h4 text-center">New Post</p>
+            <hr>
+            {% csrf_token %}
+            {{form.image.errors}}
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label for="{{form.image.name}}" class="btn btn-dark">
+                        Image <i class="fas fa-image"></i>
+                    </label>
+                </div>
+                <div class="custom-file">
+                    <input type="file" id="{{form.image.name}}" name="{{form.image.name}}" accept="images/*" required class="custom-file-input">
+                    <label class="custom-file-label">
+                        <span class="small">
+                            Theme image
+                        </span>
+                    </label>
+                </div>
+            </div>
+            {{form.caption.errors}}
+            <div class="form-group">
+                <textarea name="{{form.caption.name}}" placeholder="Caption it 😀" class="form-control" rows="10"></textarea>
+            </div>
+
+            <button class="btn btn-sm btn-outline-dark">Make Post <i class="fas fa-plus-circle"></i></button>
+        </form>
+
+    </div>
+</div>
+
+
+{% endblock %}

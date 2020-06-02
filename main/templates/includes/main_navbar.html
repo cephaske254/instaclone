@@ -14,6 +14,7 @@
                 <div class="col link-col row justify-content-end">
                     {% if request.user.is_authenticated %}
                     <a href="/" class="nav-link"><i class="fas fa-home fa-lg"></i></a>
+                    <a href="{% url 'make_post' %}" class="nav-link"><i class="fas fa-plus fa-lg"></i></a>
                     <a href="{% url 'profile' request.user %}" class="nav-link"><i class="far fa-user-circle fa-lg"></i></a>
 
                     <a href="{% url 'logout' %}" class="text-danger nav-link"><i class="fa fa-power-off fa-lg"></i></a>

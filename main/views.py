@@ -1,22 +1,21 @@
 from django.shortcuts import render, HttpResponse, Http404, redirect
-from .models import UserMethods, Follower, User, Post
+from .models import Follower, User, Post
 from .forms import NewPostForm
-from django.contrib.auth.decorators import login_required 
+from django.contrib.auth.decorators import login_required
 from django.forms import ValidationError
 # Create your views here.
+
 
 @login_required()
 def home(request):
     if not request.user.profile.first():
         return redirect('update_profile')
 
-    suggestions = UserMethods.get_suggestions(request.user)
     following = request.user.following.all()
     # posts = Post.get_all()
     posts = Post.objects.all()
     return render(request, 'home.html',
                   {
-                      'suggestions': suggestions,
                       'following': following,
                   })
 
@@ -25,37 +24,38 @@ def profile(request, username=None):
     if not request.user.profile.first() and request.user.is_authenticated:
         return redirect('update_profile')
 
-    form = NewPostForm()
     user = User.objects.filter(username=username).first()
-    user_posts = Post.objects.filter(user =user.id)
+    user_posts = user.posts.all()
     if user is None:
-       raise Http404()
-
-    if request.method == 'POST' and request.user.is_authenticated:
-        form = NewPostForm(request.POST,request.FILES)
-        if len(request.FILES) <= 0:
-            form.add_error('image',ValidationError('Image file is required'))
-        else:
-            post = form.save(commit=False)
-            post.user = request.user
-            post.save()
-            return redirect('home')
+        raise Http404()
     return render(request, 'profile.html',
                   {
-                      'title':f'Profile | @{username}',
-                      'user':user,
-                      'form':form,
-                      'posts':user_posts,
-                      'info':user.profile.first(),
+                      'title': f'Profile | @{username}',
+                      'user': user,
+                      'posts': user_posts,
+                      'info': user.profile.first(),
+                  })
+
+
+def make_post(request):
+    form = NewPostForm()
+
+    if request.method == 'POST' and request.user.is_authenticated:
+        form = NewPostForm(request.POST, request.FILES, instance=Post())
+        if form.is_valid():
+            Post.save_post(request.user,form.cleaned_data.get('caption'), request.FILES['image'])
+            return redirect('profile', request.user)
+
+        # return redirect('home')
+    return render(request, 'make_post.html',
+                  {
+                      'form': form,
+
                   })
 
 
 def follow(request, username):
     user = User.objects.filter(username=username).first()
-    following = user.following.all()
-    followers = user.followers.all()
-    follow_unfollow = Follower.follow_unfollow(username,request.user)
+    follow_unfollow = Follower.follow_unfollow(username, request.user)
     return HttpResponse(follow_unfollow)
-
-
 

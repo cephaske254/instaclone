@@ -15,6 +15,12 @@ class Post(models.Model):
     def get_posts(cls):
         return cls.objects.all()
 
+    @classmethod
+    def save_post(cls,user, caption, image):
+        post = cls(user=user,caption=caption, image=image)
+        print(image)
+        post.save()
+
 
 class Like(models.Model):
     pass
@@ -44,11 +50,3 @@ class Follower(models.Model):
                 follower.save()
                 return 'followed'
         return 'Cannot follow yourself'
-
-     
-        
-
-
-class UserMethods:
-    def get_suggestions(self):
-        return None
