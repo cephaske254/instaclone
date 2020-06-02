@@ -1,12 +1,12 @@
 <ul class="row flex-column small">
-    {% for suggestion in suggestions %}
+    {% for suggestion in users %}
 
     <li class="d-flex my-1 align-items-center border-bottom p-1" style="list-style: none;">
         <img src="{{suggestion.profile.first.profile_image.url}}" width="40" class="rounded-circle">
         <a href="{% url 'profile' suggestion %}" class="card-link col">{{suggestion.username}}</a>
-        <a href="{% url 'follow' suggestion %}" class="card-link col font-weight-bold">Follow</a>
+        <a href="{% url 'profile' suggestion.username %}" class="card-link col font-weight-bold">Profile </a>
     </li>
     {% empty %}
-    <li class="text-muted text-center small">No suggestions</li>
+    <h5 class="text-muted">Didnt find any user :)</h5>
     {% endfor %}
 </ul>

@@ -12,3 +12,21 @@ body {
     font-size: small;
     font-style: italic;
 }
+
+.popup {
+    border-radius: 40px;
+}
+
+.comments-sections{
+    height: 70vh;
+    overflow-y: scroll;
+    padding: 4px;
+}
+.comments-sections .card{
+    border-width: 0 0 1px 0;
+}
+.comments-sections::-webkit-scrollbar{
+    display: block;
+    background: rgba(0, 0, 0, 0.13);
+    scrollbar-color: #87ceeb #ff5621;
+}

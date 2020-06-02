@@ -21,11 +21,11 @@
             </button>
             <a href="{% url 'view_post' post.id %}" class="btn btn-sm m-0">
                 <i class="far fa-comment fa-lg"></i>
-                <span class="badge badge-default bg-light">70</span>
+                <span class="badge badge-default bg-light">{{post.comments.all | length }}</span>
             </a>
         </div>
     </div>
     {% endfor %}
     {% empty %}
-    <p class="h5 text-muted font-italic">No posts for now. Find and follow people to see their posts</p>
+    <p class="h5 text-muted font-italic">No posts for now. Search and follow your friends to see their posts</p>
 {% endfor %}

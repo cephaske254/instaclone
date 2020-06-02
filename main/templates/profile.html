@@ -6,7 +6,7 @@
             <div class="card-top row align-items-center">
                 <div class="profile-image-cont">
                     <img src="{{user.profile.first.profile_image.url}}" width="120" class="rounded-circle">
-                   
+
                 </div>
                 <div class="wrapper p-4">
                     {% if request.user == user %}
@@ -24,18 +24,21 @@
                         <div class="profile-info font-weight-bold row" style="justify-self: end;">
                             <p class="posts_count p-2">{{posts | length}} Posts </p>
                             <p class="followers p-2">{{user.followers.all | length}} Followers </p>
-                            
+
                             <p class="following p-2">{{user.following.all | length}} Following </p>
 
-                            
+
                         </div>
                         {% if request.user != user %}
-                        <a href="#" class="btn btn-sm  btn-outline-dark">
-                            Follow
-                        </a>
-                        <a href="#" class="btn btn-sm  btn-dark">
+                        {% if request.user.following.first.user == user %}
+                        <a href="{% url 'follow' user.username %}" class="btn btn-sm  btn-dark">
                             Following
                         </a>
+                        {% else %}
+                        <a href="{% url 'follow' user.username %}" class="btn btn-sm  btn-outline-dark">
+                            Follow
+                        </a>
+                        {% endif %}
                         {% endif %}
                     </div>
 

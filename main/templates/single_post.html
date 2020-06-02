@@ -16,20 +16,46 @@
                     </button>
                     <button class="btn btn-sm m-0">
                         <i class="far fa-comment fa-lg"></i>
-                        <span class="badge badge-default bg-light">70</span>
+                        <span class="badge badge-default bg-light">{{ post.comments.all | length }}</span>
                     </button>
                 </div>
                 <p class="card-text px-2">{{post.caption}}</p>
+                {% if comment_feedback %}
+                <div class="info d-flex justify-content-center p-1 position-fixed">
+                    <p class="popup border d-inline-block border-dark text-white font-weight-bold bg-dark p-2">{{comment_feedback}}</p>
+                </div>
+                {% endif %}
             </div>
         </div>
-        <div class="col-md-5 py-3">
-            <form action="{% url 'view_post' post.id %}" class="row justify-content-center" method="POST">
+        <div class="col-md-5 py-2">
+            <form action="{% url 'view_post' post.id %}" class="row justify-content-center py-1" method="POST">
+                {% csrf_token %}
                 <div class="btn-group">
-                    <textarea name="comment" id="" class="btn border-dark form-control" placeholder="What do you think?💭"></textarea>
+                    <textarea name="comment" required class="btn border-dark form-control" placeholder="What do you think?💭"></textarea>
                     <button class="btn btn-sm btn-dark">Comment</button>
                 </div>
             </form>
             <hr>
+            <div class="border comments-sections">
+                {% for comment in post.comments.all %}
+                <div class="card bg-light p-2 my-1 flex-row d-flex">
+                    <a href="{% url 'profile' comment.user.username %}" class="card-link">
+                        <img src="{{comment.user.profile.first.profile_image.url}}" alt="" class="rounded-circle" width="32" height="32">
+                    <div class="small px-3">
+                        <span class="font-weight-bold">
+                            @{{comment.user}} - &nbsp;
+                        </span>
+                    </a>
+                    <span class="font-italic">
+                            {{comment.comment}}
+                        </span> <br>
+                        <span class="small float-right">{{comment.date | timesince}}</span>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-center text-muted">Be the first to comment</p>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
