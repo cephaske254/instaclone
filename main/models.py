@@ -37,8 +37,19 @@ class Like(models.Model):
 
 
 class Comment(models.Model):
-    pass
+    user = models.ForeignKey(User, on_delete=models.cascade)
+    post = models.ForeignKey(Post, on_delete=models.cascade)
+    comment = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
 
+    @classmethod
+    def save_comment(cls,user,post,comment):
+        comment = cls(user=user, post=post, comment=comment)
+        if not cls.objects.filter(user=user.id, post=post.id,comment=comment.id).first():
+            comment.save()
+            return 'Comment posted'
+        else :
+            return 'Comment already noted'
 
 class Follower(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='followers')
