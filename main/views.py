@@ -37,6 +37,12 @@ def profile(request, username=None):
                   })
 
 
+def view_post(request, post_id):
+    post = Post.get_by_id(post_id)
+    return render(request, 'single_post.html',
+                  {'post': post})
+
+
 def make_post(request):
     form = NewPostForm()
 
@@ -59,7 +65,7 @@ def search(request):
     posts = Post.search(request.GET['search'])
     return render(request, 'search.html',
                   {
-                      'posts':posts
+                      'posts': posts
                   })
 
 

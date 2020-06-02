@@ -8,9 +8,9 @@
                     {{post.user}} &nbsp;</span>{{post.date | timesince}} ago
                 </p> 
             </a>
-        <div class="card-media p-0">
+        <a href="{% url 'view_post' post.id %}" class="card-media p-0">
             <img class="card-img-top" src="{{post.image.url}}">
-        </div>
+        </a>
         <div class="card-text px-4">
             <figcaption class="figcaption font-italic"><span class="font-weight-bold">{{post.user}}</span> {{post.caption}}</figcaption>
         </div>

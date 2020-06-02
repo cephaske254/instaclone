@@ -6,8 +6,10 @@
             <h3 class="text-center">Posts containing {{request.GET.search}} </h3>
             <hr>
             {% for post in posts %}
-            <div class="card d-flex flex-row my-3">
-                <img src="{{ post.image.url }}" alt="" class="" width="100">
+            <a href="{% url 'view_post' post.id %}" class="card d-flex flex-row my-3 text-decoration-none">
+                <div class="img-cont">
+                    <img src="{{ post.image.url }}" alt="" class="" width="100">
+                </div>
                 <div class="d-flex flex-column align-items-end">
                     <h4>{{post.caption | truncatechars:20 |title }}</h4>
                     <div class="profile-info p-1">
@@ -16,7 +18,7 @@
                     </div>
 
                 </div>
-            </div>
+            </a>
             {% empty %}
             <h5 class="text-muted">Couldn't find any result :)</h5>
             {% endfor %}

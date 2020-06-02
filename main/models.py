@@ -26,6 +26,10 @@ class Post(models.Model):
     def search(cls, keywords):
         result = cls.objects.filter(Q(caption__icontains=keywords))
         return result
+    
+    @classmethod
+    def get_by_id(cls,id):
+        return cls.objects.filter(id=id).first()
 
 
 class Like(models.Model):
